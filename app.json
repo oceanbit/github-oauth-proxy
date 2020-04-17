@@ -1,0 +1,29 @@
+{
+  "name": "GitHub Oauth Proxy",
+  "description": "Microservice to keep GitHub oauth secrets secret",
+  "website": "https://github.com/crutchcorn/github-oauth-proxy",
+  "repository": "https://github.com/crutchcorn/github-oauth-proxy",
+  "keywords": ["node", "express", "github", "oauth"],
+  "env": {
+    "CLIENT_ID": {
+      "description": "The Client ID for your GitHub OAuth App",
+      "value": "000111asdf"
+    },
+    "CLIENT_SECRET": {
+      "description": "The Client Secret for your GitHub OAuth App",
+      "value": "SECRET"
+    },
+    "SCOPE_STR": {
+      "description": "https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/",
+      "value": "SECRET"
+    },
+    "SERVER_CALLBACK_URL_BASE": {
+      "description": "The server URL that Heroku generates",
+      "value": "https://auth.gitshark.dev"
+    },
+    "FINAL_CALLBACK_URL_BASE": {
+      "description": "The callback to send the user to once all is said and done",
+      "value": "gitshark://ghcallback"
+    }
+  }
+}
