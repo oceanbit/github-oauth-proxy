@@ -15,29 +15,20 @@ const port = process.env.PORT || 3000;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const CLIENT_ID = process.env.CLIENT_ID;
 const SCOPE_STR = process.env.SCOPE_STR;
-const CALLBACK_URL_BASE = process.env.CALLBACK_URL_BASE;
-
-app.get('', (req, res) => {
-    res.send("In order to use this server, you must first run a query to '/authorize'");
-})
+const SERVER_CALLBACK_URL_BASE = process.env.SERVER_CALLBACK_URL_BASE;
+const FINAL_CALLBACK_URL_BASE = process.env.FINAL_CALLBACK_URL_BASE;
 
 app.get('/authorize', (req, res) => {
     const state = uuid();
 
-    console.log("I AM RUNNING");
-
     const queryParams = queryString.stringify({
 		client_id: CLIENT_ID,
-        redirect_uri: `${CALLBACK_URL_BASE}/callback`, // TODO: Fill this out
+        redirect_uri: `${SERVER_CALLBACK_URL_BASE}/callback`,
         scope: SCOPE_STR,
 		state,
     });
 
-    const URI = `https://github.com/login/oauth/authorize?${queryParams}`;
-
-    console.log("URI", URI);
-
-    res.redirect(URI);
+    res.redirect(`https://github.com/login/oauth/authorize?${queryParams}`);
 })
 
 app.get('/callback', async (req, res) => {
@@ -60,14 +51,8 @@ app.get('/callback', async (req, res) => {
         }
     });
 
-    console.log("THINGS WORKED", data);
-
     const redirectParams = queryString.stringify(data);
-    res.redirect(`${CALLBACK_URL_BASE}/success?${redirectParams}`)
+    res.redirect(`${FINAL_CALLBACK_URL_BASE}/success?${redirectParams}`)
 });
 
-app.get('/success', (req, res) => {
-    res.send(`It worked! Recieved req.query of:` + JSON.stringify(req.query));
-})
-
-app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
+app.listen(port, () => console.log(`App listening at http://localhost:${port}`))
