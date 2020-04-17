@@ -26,11 +26,12 @@ app.get('/authorize', (req, res) => {
 
     console.log("I AM RUNNING");
 
-    const queryParams =
-        `client_id=${CLIENT_ID}&` +
-        `redirect_uri=${CALLBACK_URL_BASE}/callback&` +
-        `scope=${SCOPE_STR}&` +
-		`state=${state}`
+    const queryParams = queryString.stringify({
+		client_id: CLIENT_ID,
+        redirect_uri: `${CALLBACK_URL_BASE}/callback`, // TODO: Fill this out
+        scope: SCOPE_STR,
+		state,
+    });
 
     const URI = `https://github.com/login/oauth/authorize?${queryParams}`;
 
@@ -39,9 +40,7 @@ app.get('/authorize', (req, res) => {
     res.redirect(URI);
 })
 
-app.get('/callback', (req, res) => {
-    console.log("I AM CALLING BACK", req.query);
-
+app.get('/callback', async (req, res) => {
     const code = req.query.code;
     const state = req.query.state;
 
@@ -55,21 +54,20 @@ app.get('/callback', (req, res) => {
     /**
      * @example {"access_token":"e72e16c7e42f292c6912e7710c838347ae178b4a", "scope":"repo,gist", "token_type":"bearer"}
      */
-    axios.post(`https://github.com/login/oauth/access_token?${queryParams}`, {}, {
+    const {data} = await axios.post(`https://github.com/login/oauth/access_token?${queryParams}`, {}, {
         headers: {
             Accept: "application/json"
         }
-    })
-        .then(({data}) => {
+    });
 
-            const redirectParams = queryString.stringify(data);
-            res.redirect(`${CALLBACK_URL_BASE}/success${redirectParams}`)
-        });
+    console.log("THINGS WORKED", data);
 
+    const redirectParams = queryString.stringify(data);
+    res.redirect(`${CALLBACK_URL_BASE}/success?${redirectParams}`)
 });
 
 app.get('/success', (req, res) => {
-    res.send(`It worked! Recieved req.query of:`, JSON.stringify(req.query));
+    res.send(`It worked! Recieved req.query of:` + JSON.stringify(req.query));
 })
 
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
