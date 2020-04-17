@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node ./app.js",
+    "develop": "env-cmd node ./app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,5 +20,8 @@
   "homepage": "https://github.com/crutchcorn/github-oauth-proxy#readme",
   "dependencies": {
     "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "env-cmd": "^10.1.0"
   }
 }
