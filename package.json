@@ -1,7 +1,8 @@
 {
   "name": "github-oauth-proxy",
+  "private": true,
   "version": "0.1.0",
-  "description": "",
+  "description": "A microservice written using ExpressJS in order to enable usage of the GitHub OAuth API without leaking your client_secret.",
   "main": "app.js",
   "scripts": {
     "start": "node ./app.js",
@@ -12,7 +13,7 @@
     "type": "git",
     "url": "git+https://github.com/crutchcorn/github-oauth-proxy.git"
   },
-  "author": "",
+  "author": "Corbin Crutchley",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/crutchcorn/github-oauth-proxy/issues"
