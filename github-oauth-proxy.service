@@ -1,0 +1,14 @@
+[Unit]
+Description=github-oauth-proxy - microservice that enables the usage of the GitHub OAuth API without leaking your client_secret
+Documentation=https://github.com/crutchcorn/github-oauth-proxy
+After=network.target
+
+[Service]
+EnvironmentFile=/var/www/example.com/auth/.env
+Type=simple
+User=gitshark
+ExecStart=/usr/bin/node /var/www/example.com/auth/app.js
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
