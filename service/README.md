@@ -1,6 +1,6 @@
 # Systemd Setup
 
-1.  Create a user with no login (optional)
+1. Create a user with no login (optional)
 
 	This helps with setting restrictive permissions on the `.env` file and gives the service default permissions on the rest of your server unlike using root and your current user.
 
