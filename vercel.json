@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/authorize",
+      "destination": "/api/authorize",
+      "permanent": true
+    }
+  ]
+}
