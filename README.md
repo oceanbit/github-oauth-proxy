@@ -1,6 +1,7 @@
 # GitHub OAuth Proxy
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+[![Deploy with Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/oceanbit/github-oauth-proxy)
 
 A microservice written using ExpressJS in order to enable usage of the GitHub OAuth API without leaking your `client_secret`.
 
