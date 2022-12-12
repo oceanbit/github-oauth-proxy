@@ -21,7 +21,7 @@
   "homepage": "https://github.com/crutchcorn/github-oauth-proxy#readme",
   "dependencies": {
     "axios": "^0.21.1",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "query-string": "^6.12.1",
     "uuidv4": "^6.0.7"
   },
